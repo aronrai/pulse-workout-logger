@@ -17,8 +17,20 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { username, password } = formData;
-    if (username.length < 3 || password.length < 8) {
-      alert("Bad data my boy;");
+    if (username.length === 0) {
+      alert("Please enter your username.");
+      return;
+    }
+    if (username.length < 3) {
+      alert("Username is too short.");
+      return;
+    }
+    if (password.length === 0) {
+      alert("Please enter your password.");
+      return;
+    }
+    if (password.length < 8) {
+      alert("Password should be atleast 8 characters long.");
       return;
     }
     (async () => {
@@ -51,7 +63,7 @@ const Login = () => {
           value={formData.username}
           onChange={handleFormDataChange}
           required
-          className="text-sm px-4 py-2 outline-none rounded-sm border"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <input
           type="password"
@@ -60,15 +72,15 @@ const Login = () => {
           value={formData.password}
           onChange={handleFormDataChange}
           required
-          className="text-sm px-4 py-2 outline-none rounded-sm border"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <button
-          className={`text-sm text-[#333] font-medium px-4 py-2 outline-none rounded-sm ${loggingIn ? "bg-black" : "bg-lime-400 cursor-pointer"}`}
+          className={`text-sm text-[#111] font-medium px-4 py-2 outline-none rounded-sm ${loggingIn ? "bg-[#222]" : "bg-lime-400 cursor-pointer"}`}
         >
           {loggingIn ? "Logging In..." : "Login"}
         </button>
       </form>
-      <p className="text-sm">
+      <p className="text-sm text-zinc-300">
         Don't have an account? <Link to="/auth/signup">Sign Up</Link>
       </p>
     </section>

@@ -16,11 +16,10 @@ const useLogStore = create((set, get) => ({
       });
       const data = response.data;
       const volume = data.data.volume;
-      const fetchCurrentLogs = get().fetchCurrentLogs;
-      const fetchCurrentVolume = get().fetchCurrentVolume;
-      fetchCurrentLogs();
-      fetchCurrentVolume();
+      set((state) => ({ currentVolume: state.currentVolume + volume }));
       set((state) => ({ totalVolume: state.totalVolume + volume }));
+      const fetchCurrentLogs = get().fetchCurrentLogs;
+      fetchCurrentLogs();
     } catch (err) {
       console.error(`Error: ${err.response.data.message}`);
     }
@@ -35,7 +34,6 @@ const useLogStore = create((set, get) => ({
         },
       });
       const data = response.data;
-      console.log(data);
       set({ logs: data.data });
     } catch (err) {
       console.log(`Error: ${err.response.data.message}`);
@@ -95,10 +93,10 @@ const useLogStore = create((set, get) => ({
           Authorization: `Bearer ${token}`,
         },
       });
+      const fetchLogs = get().fetchLogs;
+      fetchLogs();
       const currentLogs = get().currentLogs;
-      console.log(currentLogs);
       const newCurrentLogs = currentLogs.filter((log) => log._id !== id);
-      console.log(newCurrentLogs);
       set({ currentLogs: newCurrentLogs });
       set((state) => ({ currentVolume: state.currentVolume - volume }));
       set((state) => ({ totalVolume: state.totalVolume - volume }));

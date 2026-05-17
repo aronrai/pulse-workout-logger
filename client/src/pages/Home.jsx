@@ -4,6 +4,7 @@ import ActivityCard from "../components/ActivityCard";
 import useAuthStore from "../store/useAuthStore";
 import useLogStore from "../store/useLogStore";
 import { useEffect, useState } from "react";
+import Loading from "../components/Loading";
 
 const Home = () => {
   let user = useAuthStore((state) => state.user);
@@ -35,8 +36,20 @@ const Home = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { exercise, kg, reps } = formData;
-    if (exercise.length === 0 || kg < 1 || reps < 1) {
-      alert("Check values again.");
+    if (exercise.length === 0) {
+      alert("Please enter the name of the exercise.");
+      return;
+    }
+    if (exercise.length < 3) {
+      alert("Exercise name is too short.");
+      return;
+    }
+    if (kg < 1) {
+      alert("Weight should be a positive value.");
+      return;
+    }
+    if (reps < 1) {
+      alert("Add atleast 1 rep.");
       return;
     }
     createLog(formData);
@@ -55,9 +68,9 @@ const Home = () => {
           <br />
           <span className="text-zinc-500">More lifting.</span>
         </h1>
-        <p className="text-base">
+        <p className="text-sm text-zinc-300">
           Pulse is a high-velocity workout logger designed to stay out of your
-          way. Track your volume and streaks without the digital bloat.
+          way. Track your volume without the digital bloat.
         </p>
         <Link
           to="/auth/signup"
@@ -74,7 +87,7 @@ const Home = () => {
         <DisplayCard
           a="Today's Volume"
           b={currentVolume ? currentVolume : currentVolume === 0 ? 0 : "- - -"}
-          c="kg"
+          c="Kg"
         />
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
@@ -84,7 +97,7 @@ const Home = () => {
           name="exercise"
           value={formData.exercise}
           onChange={handleFormDataChange}
-          className="text-sm outline-none p-4 bg-[#222] rounded-lg w-full"
+          className="text-sm text-zinc-300 outline-none p-4 bg-[#222] rounded-lg w-full"
         />
         <div className="flex items-center gap-2">
           <input
@@ -93,7 +106,7 @@ const Home = () => {
             name="kg"
             value={formData.kg}
             onChange={handleFormDataChange}
-            className="flex-1 text-sm outline-none p-4 bg-[#222] rounded-lg min-w-0"
+            className="flex-1 text-sm text-zinc-300 outline-none p-4 bg-[#222] rounded-lg min-w-0"
           />
           <input
             type="number"
@@ -101,15 +114,19 @@ const Home = () => {
             name="reps"
             value={formData.reps}
             onChange={handleFormDataChange}
-            className="flex-1 text-sm outline-none p-4 bg-[#222] rounded-lg min-w-0"
+            className="flex-1 text-sm text-zinc-300 outline-none p-4 bg-[#222] rounded-lg min-w-0"
           />
-          <button className="flex-1 text-sm text-[#333] font-medium p-4 rounded-lg bg-lime-400 cursor-pointer">
+          <button className="flex-1 text-sm text-[#111] font-medium p-4 rounded-lg bg-lime-400 cursor-pointer">
             Add
           </button>
         </div>
       </form>
       <div>
-        <h3 className="text-sm mb-4">Today's Activity</h3>
+        <h3 className="text-base font-medium mb-4">
+          {!currentLogs || currentLogs.length === 0
+            ? "No Activity Today"
+            : "Today's Activity"}
+        </h3>
         {currentLogs ? (
           <div className="flex flex-col gap-2">
             {currentLogs?.map((log) => (
@@ -117,9 +134,7 @@ const Home = () => {
             ))}
           </div>
         ) : (
-          <p className="text-sm uppercase animate-pulse tracking-widest">
-            Loading
-          </p>
+          <Loading />
         )}
       </div>
     </section>

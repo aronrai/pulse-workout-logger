@@ -10,7 +10,7 @@ const useAuthStore = create((set) => ({
       set({ isInitialising: true });
       const token = localStorage.getItem("token");
       if (!token) {
-        set({ user: null, isInitialising: false });
+        set({ isInitialising: false });
         return;
       }
       const response = await api.get("/users/me", {
@@ -22,7 +22,7 @@ const useAuthStore = create((set) => ({
       set({ user: data.data, isInitialising: false });
     } catch (err) {
       localStorage.removeItem("token");
-      set({ user: null });
+      set({ user: null, isInitialising: false });
       console.error(`Error: ${err.response.data.message}`);
     }
   },

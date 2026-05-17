@@ -18,7 +18,11 @@ const App = () => {
   }, [fetchUser]);
 
   if (isInitialising) {
-    return <Loading />;
+    return (
+      <section className="h-screen flex justify-center items-center">
+        <Loading />
+      </section>
+    );
   }
   return (
     <>

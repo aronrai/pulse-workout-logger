@@ -41,7 +41,10 @@ const getCurrentLogs = async (req, res, next) => {
   try {
     const startOfToday = new Date();
     startOfToday.setHours(0, 0, 0, 0);
-    const logs = await Log.find({ createdAt: { $gte: startOfToday } });
+    const logs = await Log.find({
+      user: req.userId,
+      createdAt: { $gte: startOfToday },
+    });
     res.json({
       success: true,
       data: logs,

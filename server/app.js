@@ -9,9 +9,20 @@ require("dotenv").config();
 
 const app = express();
 
-// Middlewares
-
-app.use(cors());
+const allowedOrigins = ["https://pulse-workout-logger.onrender.com"];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Blocked by security policy (CORS)"));
+      }
+    },
+    credentials: true,
+  }),
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

@@ -16,13 +16,32 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, username, password, confirmPassword } = formData;
-    if (
-      name.length < 2 ||
-      username.length < 2 ||
-      password.length < 7 ||
-      password !== confirmPassword
-    ) {
-      alert("Wrong data my boy;");
+    if (name.length === 0) {
+      alert("Please enter your name.");
+      return;
+    }
+    if (name.length < 3) {
+      alert("Name is too short.");
+      return;
+    }
+    if (username.length === 0) {
+      alert("Please enter a username.");
+      return;
+    }
+    if (username.length < 3) {
+      alert("Username is too short.");
+      return;
+    }
+    if (password.length === 0) {
+      alert("Please enter a password.");
+      return;
+    }
+    if (password.length < 8) {
+      alert("Password should be atleast 8 characters long.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      alert("Passwords don't match.");
       return;
     }
     (async () => {
@@ -39,6 +58,7 @@ const SignUp = () => {
         });
       } catch (err) {
         console.error(`Error: ${err.response.data.message}`);
+        alert(err.response.data.message);
       } finally {
         setSigningUp(false);
       }
@@ -50,14 +70,17 @@ const SignUp = () => {
   return (
     <section className="flex flex-col justify-center items-center gap-4 max-w-2xl px-4 py-16 mx-auto min-h-[calc(100vh-64px)]">
       <h2 className="text-2xl">Get Started on Pulse</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-75">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-2 w-full max-w-75"
+      >
         <input
           type="text"
           placeholder="Jone Doe"
           name="name"
           value={formData.name}
           onChange={handleFormDataChange}
-          className="text-sm px-4 py-2 outline-none rounded-sm border"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <input
           type="text"
@@ -65,7 +88,7 @@ const SignUp = () => {
           name="username"
           value={formData.username}
           onChange={handleFormDataChange}
-          className="text-sm px-4 py-2 outline-none rounded-sm border"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <input
           type="password"
@@ -73,7 +96,7 @@ const SignUp = () => {
           name="password"
           value={formData.password}
           onChange={handleFormDataChange}
-          className="text-sm px-4 py-2 outline-none rounded-sm border"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <input
           type="password"
@@ -81,16 +104,16 @@ const SignUp = () => {
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={handleFormDataChange}
-          className="text-sm px-4 py-2 outline-none rounded-sm border"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <button
-          className={`text-sm text-[#333] font-medium px-4 py-2 outline-none rounded-sm ${signingUp ? "bg-black" : "bg-lime-400 cursor-pointer"}`}
+          className={`text-sm text-[#111] font-medium px-4 py-2 outline-none rounded-sm ${signingUp ? "bg-[#222]" : "bg-lime-400 cursor-pointer"}`}
           disabled={signingUp}
         >
           {signingUp ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
-      <p className="text-sm">
+      <p className="text-sm text-zinc-300">
         Already have an account? <Link to="/auth/login">Log in</Link>
       </p>
     </section>

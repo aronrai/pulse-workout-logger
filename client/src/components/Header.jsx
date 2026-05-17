@@ -7,7 +7,7 @@ const Header = () => {
     <header className="flex justify-between items-center h-16 max-w-2xl px-4 mx-auto border-b border-[#333]">
       <div className="text-2xl">PULSE</div>
       <nav>
-        <ul className="text-sm flex items-center gap-4">
+        <ul className="text-sm text-zinc-300 flex items-center gap-4">
           <li>
             <Link to="/">Home</Link>
           </li>
