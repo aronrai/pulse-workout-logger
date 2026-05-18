@@ -38,13 +38,11 @@ const Profile = () => {
           </p>
         </div>
       </div>
-      {/* <div className="flex items-center gap-2 "> */}
       <DisplayCard
         a="Total Volume"
         b={totalVolume ? totalVolume : totalVolume === 0 ? 0 : "- - -"}
         c="kg"
       />
-      {/* </div> */}
       <div className="w-full h-px bg-zinc-900 mt-8"></div>
       <Link to="/log-history" className="text-sm text-zinc-300">
         Log History

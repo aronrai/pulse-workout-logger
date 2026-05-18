@@ -22,9 +22,6 @@ const Header = () => {
             </li>
           ) : (
             <>
-              {/* <li>
-                <Link to="/auth/login">Login</Link>
-              </li> */}
               <li>
                 <Link to="/auth/signup">Get Started</Link>
               </li>

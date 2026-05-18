@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../api/api";
 
@@ -64,9 +64,6 @@ const SignUp = () => {
       }
     })();
   };
-  useEffect(() => {
-    console.log(formData);
-  });
   return (
     <section className="flex flex-col justify-center items-center gap-4 max-w-2xl px-4 py-16 mx-auto min-h-[calc(100vh-64px)]">
       <h2 className="text-2xl">Get Started on Pulse</h2>

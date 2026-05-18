@@ -16,17 +16,14 @@ const Home = () => {
   const fetchData = useLogStore((state) => state.fetchData);
 
   // useEffect(() => {
-  //   console.log("Fetching current Volume");
   //   fetchCurrentVolume(user);
   // }, [fetchCurrentVolume, user]);
 
   // useEffect(() => {
-  //   console.log("Fetching current logs");
   //   fetchCurrentLogs(user);
   // }, [fetchCurrentLogs, user]);
 
   useEffect(() => {
-    console.log("Fetching current");
     fetchData(user);
   }, [fetchData, user]);
 
@@ -37,7 +34,6 @@ const Home = () => {
   });
 
   const handleFormDataChange = (e) => {
-    console.log(formData);
     setFormData((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 

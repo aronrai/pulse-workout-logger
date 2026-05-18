@@ -1,5 +1,6 @@
 import { IoTrashBin } from "react-icons/io5";
 import useLogStore from "../store/useLogStore";
+import formatDate from "../utils/formatDate";
 
 const ActivityCard = ({ log, history }) => {
   const deleteLog = useLogStore((state) => state.deleteLog);
@@ -14,7 +15,7 @@ const ActivityCard = ({ log, history }) => {
         {history && (
           <>
             {" ~ "}
-            <span>{new Date(log.createdAt).toDateString()}</span>
+            <span>{formatDate(log.createdAt)}</span>
           </>
         )}
       </p>

@@ -122,7 +122,6 @@ const useLogStore = create((set, get) => ({
       const logData = logResponse.data;
       const volumeData = volumeResponse.data;
       const totalVolumeData = totalVolumeResponse.data;
-      console.log(logData, volumeData, totalVolumeData);
       set({
         currentLogs: logData.data,
         totalVolume: totalVolumeData.totalVolume,
