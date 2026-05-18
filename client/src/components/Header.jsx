@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
+import nameInitial from "../utils/nameInitial";
 
 const Header = () => {
   const user = useAuthStore((state) => state.user);
@@ -13,7 +14,11 @@ const Header = () => {
           </li>
           {user ? (
             <li>
-              <Link to="/profile">Profile</Link>
+              <div className="h-8 w-8 bg-[#222] rounded-full flex justify-center items-center cursor-pointer">
+                <Link to="/profile" className="text-xs">
+                  {nameInitial(user.name)}
+                </Link>
+              </div>
             </li>
           ) : (
             <>
