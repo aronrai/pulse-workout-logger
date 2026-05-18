@@ -5,7 +5,7 @@ import formatDate from "../utils/formatDate";
 const ActivityCard = ({ log, history }) => {
   const deleteLog = useLogStore((state) => state.deleteLog);
   return (
-    <div className="flex justify-between items-center py-4 border-b border-zinc-900">
+    <div className="flex justify-between items-center gap-2 py-4 border-b border-zinc-900">
       <p className="text-sm text-zinc-300">
         <span>{log.exercise}</span>
         {" ~ "}

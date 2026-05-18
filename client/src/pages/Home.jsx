@@ -45,7 +45,11 @@ const Home = () => {
       return;
     }
     if (exercise.length < 3) {
-      alert("Exercise name is too short.");
+      alert("Exercise name is too short (min 3 characters).");
+      return;
+    }
+    if (exercise.length > 30) {
+      alert("Exercise name is to long (max 30 characters).");
       return;
     }
     if (kg < 1) {
