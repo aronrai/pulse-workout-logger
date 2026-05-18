@@ -23,34 +23,12 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is required for account security"],
       minlength: [8, "Password must be at least 8 characters long"],
     },
-    // High-performance tracking stats
-    currentStreak: {
-      type: Number,
-      default: 0,
-      min: [0, "Streak cannot be a negative value"],
-    },
-    longestStreak: {
-      type: Number,
-      default: 0,
-      min: [0, "Longest streak cannot be a negative value"],
-    },
-    maxDailyVolume: {
-      type: Number,
-      default: 0,
-      min: [0, "Volume cannot be a negative value"],
-    },
-    totalLifeTimeVolume: {
-      type: Number,
-      default: 0,
-      min: [0, "Lifetime volume cannot be a negative value"],
-    },
   },
   {
     timestamps: true,
   },
 );
 
-// Hash password before saving
 userSchema.pre("save", async function () {
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 12);

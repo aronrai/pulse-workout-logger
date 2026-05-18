@@ -9,18 +9,26 @@ import Loading from "../components/Loading";
 const Home = () => {
   let user = useAuthStore((state) => state.user);
   const currentVolume = useLogStore((state) => state.currentVolume);
-  const fetchCurrentVolume = useLogStore((state) => state.fetchCurrentVolume);
+  // const fetchCurrentVolume = useLogStore((state) => state.fetchCurrentVolume);
   const currentLogs = useLogStore((state) => state.currentLogs);
-  const fetchCurrentLogs = useLogStore((state) => state.fetchCurrentLogs);
+  // const fetchCurrentLogs = useLogStore((state) => state.fetchCurrentLogs);
   const createLog = useLogStore((state) => state.createLog);
+  const fetchData = useLogStore((state) => state.fetchData);
+
+  // useEffect(() => {
+  //   console.log("Fetching current Volume");
+  //   fetchCurrentVolume(user);
+  // }, [fetchCurrentVolume, user]);
+
+  // useEffect(() => {
+  //   console.log("Fetching current logs");
+  //   fetchCurrentLogs(user);
+  // }, [fetchCurrentLogs, user]);
 
   useEffect(() => {
-    fetchCurrentVolume();
-  }, [fetchCurrentVolume]);
-
-  useEffect(() => {
-    fetchCurrentLogs();
-  }, [fetchCurrentLogs]);
+    console.log("Fetching current");
+    fetchData(user);
+  }, [fetchData, user]);
 
   const [formData, setFormData] = useState({
     exercise: "",
@@ -63,7 +71,7 @@ const Home = () => {
   if (!user) {
     return (
       <section className="flex flex-col gap-8 max-w-2xl px-4 py-16 mx-auto min-h-[calc(100vh-64px)]">
-        <h1 className="text-4xl font-bold italic tracking-tight uppercase">
+        <h1 className="text-4xl font-black italic tracking-tight uppercase">
           Less tapping.
           <br />
           <span className="text-zinc-500">More lifting.</span>
@@ -73,23 +81,47 @@ const Home = () => {
           way. Track your volume without the digital bloat.
         </p>
         <Link
-          to="/auth/signup"
-          className="w-fit text-sm text-[#111] font-medium bg-lime-400 px-4 py-2 rounded-sm"
+          to="/auth/login"
+          className="w-fit text-sm text-[#111] font-medium bg-lime-400 px-4 py-2 rounded-lg"
         >
           Start Logging
         </Link>
+        <div className="grid grid-cols-3 gap-4 pt-12 border-t border-zinc-900 mt-12">
+          <div>
+            <h3 className="text-xs uppercase tracking-wider text-zinc-300 font-medium">
+              Real-Time
+            </h3>
+            <p className="text-xs text-zinc-500 mt-1 font-light">
+              Instant volume aggregation.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-xs uppercase tracking-wider text-zinc-300 font-medium">
+              Zero Bloat
+            </h4>
+            <p className="text-xs text-zinc-500 mt-1 font-light">
+              No ads, templates, or noise.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-xs uppercase tracking-wider text-zinc-300 font-medium">
+              Persistent
+            </h4>
+            <p className="text-xs text-zinc-500 mt-1 font-light">
+              Lifetime training archiving.
+            </p>
+          </div>
+        </div>
       </section>
     );
   }
   return (
     <section className="flex flex-col gap-8 max-w-2xl px-4 py-16 mx-auto min-h-[calc(100vh-64px)]">
-      <div className="flex items-center gap-4">
-        <DisplayCard
-          a="Today's Volume"
-          b={currentVolume ? currentVolume : currentVolume === 0 ? 0 : "- - -"}
-          c="Kg"
-        />
-      </div>
+      <DisplayCard
+        a="Today's Volume"
+        b={currentVolume ? currentVolume : currentVolume === 0 ? 0 : "- - -"}
+        c="Kg"
+      />
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <input
           type="text"

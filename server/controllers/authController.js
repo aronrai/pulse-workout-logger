@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const { signUpSchema, loginSchema } = require("../validations/authSchema");
 
-// Sign Up
 const signUp = async (req, res, next) => {
   try {
     const { error, value } = signUpSchema.validate(req.body, {

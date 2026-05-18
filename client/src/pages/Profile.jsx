@@ -38,14 +38,14 @@ const Profile = () => {
           </p>
         </div>
       </div>
-      <div className="flex items-center gap-2">
-        <DisplayCard
-          a="Total Volume"
-          b={totalVolume ? totalVolume : totalVolume === 0 ? 0 : "- - -"}
-          c="kg"
-        />
-      </div>
-      <div className="w-full h-px bg-[#333] mt-8"></div>
+      {/* <div className="flex items-center gap-2 "> */}
+      <DisplayCard
+        a="Total Volume"
+        b={totalVolume ? totalVolume : totalVolume === 0 ? 0 : "- - -"}
+        c="kg"
+      />
+      {/* </div> */}
+      <div className="w-full h-px bg-zinc-900 mt-8"></div>
       <Link to="/log-history" className="text-sm text-zinc-300">
         Log History
       </Link>
@@ -55,13 +55,13 @@ const Profile = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={handleLogout}
-              className="text-sm text-zinc-300 px-4 py-0.5 rounded-md bg-[#222] cursor-pointer"
+              className="text-sm text-red-500 cursor-pointer"
             >
               Yes
             </button>
             <button
               onClick={() => setLogoutMenu(false)}
-              className="text-sm text-zinc-300 px-4 py-0.5 rounded-md bg-[#222] cursor-pointer"
+              className="text-sm text-zinc-300 cursor-pointer"
             >
               No
             </button>

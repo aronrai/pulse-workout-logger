@@ -14,6 +14,7 @@ const App = () => {
   const isInitialising = useAuthStore((state) => state.isInitialising);
   const fetchUser = useAuthStore((state) => state.fetchUser);
   useEffect(() => {
+    console.log("Fetching user.");
     fetchUser();
   }, [fetchUser]);
 

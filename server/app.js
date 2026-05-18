@@ -9,7 +9,10 @@ require("dotenv").config();
 
 const app = express();
 
-const allowedOrigins = ["https://pulse-workout-logger.onrender.com"];
+const allowedOrigins = [
+  "https://pulse-workout-logger.onrender.com",
+  "http://localhost:5173",
+];
 app.use(
   cors({
     origin: (origin, callback) => {

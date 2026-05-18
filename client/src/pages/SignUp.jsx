@@ -80,7 +80,7 @@ const SignUp = () => {
           name="name"
           value={formData.name}
           onChange={handleFormDataChange}
-          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-lg border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <input
           type="text"
@@ -88,7 +88,7 @@ const SignUp = () => {
           name="username"
           value={formData.username}
           onChange={handleFormDataChange}
-          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-lg border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <input
           type="password"
@@ -96,7 +96,7 @@ const SignUp = () => {
           name="password"
           value={formData.password}
           onChange={handleFormDataChange}
-          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-lg border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <input
           type="password"
@@ -104,10 +104,10 @@ const SignUp = () => {
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={handleFormDataChange}
-          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-sm border border-zinc-700 focus:shadow-xs shadow-zinc-700"
+          className="text-sm text-zinc-300 px-4 py-2 outline-none rounded-lg border border-zinc-700 focus:shadow-xs shadow-zinc-700"
         />
         <button
-          className={`text-sm text-[#111] font-medium px-4 py-2 outline-none rounded-sm ${signingUp ? "bg-[#222]" : "bg-lime-400 cursor-pointer"}`}
+          className={`text-sm text-[#111] font-medium px-4 py-2 outline-none rounded-lg ${signingUp ? "bg-[#222]" : "bg-lime-400 cursor-pointer"}`}
           disabled={signingUp}
         >
           {signingUp ? "Signing Up..." : "Sign Up"}

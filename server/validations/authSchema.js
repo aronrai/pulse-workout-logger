@@ -1,7 +1,5 @@
 const Joi = require("joi");
 
-// --- Reusable Rules ---
-
 const usernameRule = Joi.string()
   .trim()
   .alphanum()
@@ -32,8 +30,6 @@ const passwordRule = Joi.string()
       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@, #, $, %, &, *)",
     "any.required": "Password is required for account security",
   });
-
-// --- Schemas ---
 
 const signUpSchema = Joi.object({
   name: Joi.string().trim().min(3).max(30).required().messages({

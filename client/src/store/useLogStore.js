@@ -39,10 +39,10 @@ const useLogStore = create((set, get) => ({
       console.log(`Error: ${err.response.data.message}`);
     }
   },
-  fetchCurrentLogs: async () => {
+  fetchCurrentLogs: async (user) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) return;
+      if (!token && !user) return;
       const response = await api.get("/logs/current-logs", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -69,10 +69,10 @@ const useLogStore = create((set, get) => ({
       console.log(`Error: ${err.response.data.message}`);
     }
   },
-  fetchCurrentVolume: async () => {
+  fetchCurrentVolume: async (user) => {
     try {
       const token = localStorage.getItem("token");
-      if (!token) return;
+      if (!token && !user) return;
       const response = await api.get("/logs/current-volume", {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -102,6 +102,34 @@ const useLogStore = create((set, get) => ({
       set((state) => ({ totalVolume: state.totalVolume - volume }));
     } catch (err) {
       console.error(`Error: ${err.response.data.message}`);
+    }
+  },
+  fetchData: async (user) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token || !user) return;
+      const apiConfig = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const [logResponse, volumeResponse, totalVolumeResponse] =
+        await Promise.all([
+          api.get("/logs/current-logs", apiConfig),
+          api.get("/logs/current-volume", apiConfig),
+          api.get("/logs/total-volume", apiConfig),
+        ]);
+      const logData = logResponse.data;
+      const volumeData = volumeResponse.data;
+      const totalVolumeData = totalVolumeResponse.data;
+      console.log(logData, volumeData, totalVolumeData);
+      set({
+        currentLogs: logData.data,
+        totalVolume: totalVolumeData.totalVolume,
+        currentVolume: volumeData.currentVolume,
+      });
+    } catch (err) {
+      console.log(`Error: ${err.response.data.message}`);
     }
   },
 }));

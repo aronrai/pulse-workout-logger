@@ -4,7 +4,7 @@ import useLogStore from "../store/useLogStore";
 const ActivityCard = ({ log, history }) => {
   const deleteLog = useLogStore((state) => state.deleteLog);
   return (
-    <div className="flex justify-between items-center py-4 border-b border-[#333]">
+    <div className="flex justify-between items-center py-4 border-b border-zinc-900">
       <p className="text-sm text-zinc-300">
         <span>{log.exercise}</span>
         {" ~ "}
